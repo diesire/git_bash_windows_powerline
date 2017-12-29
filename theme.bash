@@ -216,7 +216,7 @@ function __powerline_prompt_command {
     [[ -n "${info}" ]] && __powerline_left_segment "${info}"
   done
 
-  [[ -n "${LEFT_PROMPT}" ]] && LEFT_PROMPT+="$(__color - ${LAST_SEGMENT_COLOR})${separator_char}$(__color)"
+  [[ -n "${LEFT_PROMPT}" ]] && LEFT_PROMPT+=" $(__color - ${LAST_SEGMENT_COLOR})${separator_char}$(__color)"
   PS1="${LEFT_PROMPT} "
 
   ## cleanup ##
