@@ -197,7 +197,7 @@ function __powerline_last_status_prompt {
   local symbols=()
   [[ $last_status -ne 0 ]] && symbols+="$(__color ${STATUS_PROMPT_ERROR_COLOR})${STATUS_PROMPT_ERROR}"
   [[ $UID -eq 0 ]] && symbols+="$(__color ${STATUS_PROMPT_ROOT_COLOR})${STATUS_PROMPT_ROOT}"
-  [[ ! -z $(read -r line <<< $(jobs -l); echo $line) ]] && symbols+="$(__color ${STATUS_PROMPT_JOBS_COLOR})${STATUS_PROMPT_JOBS}"
+  [[ ! -z $(read -r -n1 stopped_jobs <<< $(jobs -sp); echo $stopped_jobs) ]] && symbols+="$(__color ${STATUS_PROMPT_JOBS_COLOR})${STATUS_PROMPT_JOBS}"
 
   [[ -n "$symbols" ]] && echo "$symbols|${STATUS_PROMPT_COLOR}"
 }
