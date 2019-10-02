@@ -196,7 +196,7 @@ function __powerline_left_segment {
 function __powerline_last_status_prompt {
   local symbols=()  
   local stopped_jobs
-  jobs -sp | read -n1 stopped_jobs
+  read -N1 stopped_jobs < <(jobs -sp)
   [[ $last_status -ne 0 ]] && symbols+="$(__color ${STATUS_PROMPT_ERROR_COLOR})${STATUS_PROMPT_ERROR}"
   [[ $UID -eq 0 ]] && symbols+="$(__color ${STATUS_PROMPT_ROOT_COLOR})${STATUS_PROMPT_ROOT}"
   [[ ! -z "$stopped_jobs" ]] && symbols+="$(__color ${STATUS_PROMPT_JOBS_COLOR})${STATUS_PROMPT_JOBS}"
