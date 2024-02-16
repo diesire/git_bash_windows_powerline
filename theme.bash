@@ -7,35 +7,38 @@
 # More info about color codes in https://en.wikipedia.org/wiki/ANSI_escape_code
 
 
-PROMPT_CHAR=${POWERLINE_PROMPT_CHAR:=""}
-POWERLINE_LEFT_SEPARATOR=" "
-POWERLINE_PROMPT="last_status user_info cwd scm"
+readonly PROMPT_CHAR=${POWERLINE_PROMPT_CHAR:=""}
+readonly POWERLINE_LEFT_SEPARATOR=" "
+readonly POWERLINE_PROMPT="last_status venv user_info cwd scm"
 
-USER_INFO_SSH_CHAR=" "
-USER_INFO_PROMPT_COLOR="C B"
+readonly USER_INFO_SSH_CHAR=" "
+readonly USER_INFO_PROMPT_COLOR="C B"
 
-SCM_GIT_CHAR=" "
-SCM_PROMPT_CLEAN=""
-SCM_PROMPT_DIRTY="*"
-SCM_PROMPT_AHEAD="↑"
-SCM_PROMPT_BEHIND="↓"
-SCM_PROMPT_CLEAN_COLOR="G Bl"
-SCM_PROMPT_DIRTY_COLOR="R Bl"
-SCM_PROMPT_AHEAD_COLOR=""
-SCM_PROMPT_BEHIND_COLOR=""
-SCM_PROMPT_STAGED_COLOR="Y Bl"
-SCM_PROMPT_UNSTAGED_COLOR="R Bl"
-SCM_PROMPT_COLOR=${SCM_PROMPT_CLEAN_COLOR}
+readonly VENV_PROMPT_COLOR="M Y"
+readonly PYTHON_SYMBOL=''
 
-CWD_PROMPT_COLOR="B C"
+readonly SCM_GIT_CHAR=" "
+readonly SCM_PROMPT_CLEAN=""
+readonly SCM_PROMPT_DIRTY="*"
+readonly SCM_PROMPT_AHEAD="↑"
+readonly SCM_PROMPT_BEHIND="↓"
+readonly SCM_PROMPT_CLEAN_COLOR="G Bl"
+readonly SCM_PROMPT_DIRTY_COLOR="R Bl"
+readonly SCM_PROMPT_AHEAD_COLOR=""
+readonly SCM_PROMPT_BEHIND_COLOR=""
+readonly SCM_PROMPT_STAGED_COLOR="Y Bl"
+readonly SCM_PROMPT_UNSTAGED_COLOR="R Bl"
+readonly SCM_PROMPT_COLOR=${SCM_PROMPT_CLEAN_COLOR}
 
-STATUS_PROMPT_COLOR="Bl R B"
-STATUS_PROMPT_ERROR="✘"
-STATUS_PROMPT_ERROR_COLOR="Bl R B"
-STATUS_PROMPT_ROOT="⚡"
-STATUS_PROMPT_ROOT_COLOR="Bl Y B"
-STATUS_PROMPT_JOBS="●"
-STATUS_PROMPT_JOBS_COLOR="Bl Y B"
+readonly CWD_PROMPT_COLOR="B C"
+
+readonly STATUS_PROMPT_COLOR="Bl R B"
+readonly STATUS_PROMPT_ERROR="✘"
+readonly STATUS_PROMPT_ERROR_COLOR="Bl R B"
+readonly STATUS_PROMPT_ROOT="⚡"
+readonly STATUS_PROMPT_ROOT_COLOR="Bl Y B"
+readonly STATUS_PROMPT_JOBS="●"
+readonly STATUS_PROMPT_JOBS_COLOR="Bl Y B"
 
 function __color {
   local bg
@@ -88,6 +91,12 @@ function __powerline_user_info_prompt {
 
 function __powerline_cwd_prompt {
   echo "\w|${CWD_PROMPT_COLOR}"
+}
+
+function __powerline_venv_prompt {
+  if [ -n "${VIRTUAL_ENV}" ] ; then
+	echo "$PYTHON_SYMBOL($(basename $VIRTUAL_ENV))|${VENV_PROMPT_COLOR}"
+  fi
 }
 
 function __powerline_scm_prompt {
